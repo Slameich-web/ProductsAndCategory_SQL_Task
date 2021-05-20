@@ -1,0 +1,52 @@
+--Создаем таблицу продукты
+
+CREATE TABLE Products (
+	id int PRIMARY KEY,
+	name varchar(255) NOT NULL,
+);
+
+--Заполняем таблицу продукты
+
+INSERT INTO Products
+VALUES  (1, 'bread'),
+	    (2, 'milk'),
+    	(3, 'cake'),
+	    (4, 'egg'),
+    	(5, 'butter');
+
+--Создаем таблицу категории 
+
+CREATE TABLE Category (
+	id INT PRIMARY KEY,
+	name NVARCHAR(255) NOT NULL
+);
+
+--Заполняем таблицу категории 
+
+INSERT INTO Category 
+VALUES  (1, 'bakery'),
+        (2, 'milky'),
+        (3, 'desserts');
+
+--Создаем таблицы для связи таблиц
+
+CREATE TABLE ProductsAndCategory (
+	products_id  INT not null,
+	category_id INT not null
+);
+
+-- Заполняем таблицу ключами
+
+INSERT INTO ProductsAndCategory
+VALUES  (1, 1),
+		    (2, 2),
+		    (3, 3),
+        (5, 2);
+
+--Выбираем из таблицы продукты и категории
+
+SELECT 
+    Products.name AS Products, Category.name AS Category 
+        FROM Products
+    LEFT JOIN ProductsAndCategory  ON Products.id = ProductsAndCategory.products_id
+    LEFT JOIN Category ON ProductsAndCategory.category_id = Category.id
